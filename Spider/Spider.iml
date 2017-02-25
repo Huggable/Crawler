@@ -10,15 +10,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/javlib/mysql-connector-java-5.1.40/mysql-connector-java-5.1.40-bin.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://E:/javlib/httpcomponents-client-4.5.3/lib/commons-codec-1.9.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -140,6 +131,43 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/javlib/mysql-connector-java-5.1.40/mysql-connector-java-5.1.40-bin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://E:/javlib/selenium-2.53.0/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://E:/javlib/selenium-2.53.0/libs" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/javlib/selenium-2.53.0/selenium-java-2.53.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://E:/javlib/commons-codec-1.10/apidocs" />
+          <root url="file://E:/javlib/commons-lang3-3.5/apidocs" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://E:/javlib/selenium-2.53.0/selenium-java-2.53.0-srcs.jar!/" />
+          <root url="file://E:/javlib/New Folder/httpcomponents-client-4.5.3/examples" />
+          <root url="file://E:/javlib/httpcomponents-client-4.5.3/examples" />
+          <root url="file://E:/javlib/httpcomponents-core-4.4.6/examples" />
+          <root url="file://E:/javlib/mysql-connector-java-5.1.40/src" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>

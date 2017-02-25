@@ -1,24 +1,13 @@
 package pers.crawler.zhihu;
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import pers.crawler.basic.BasicFunctions;
+
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.regex.Pattern;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 import java.util.regex.Matcher;
-
-
-
-import pers.crawler.basic.*;
+import java.util.regex.Pattern;
 
 
 
@@ -91,7 +80,7 @@ public class ZhihuSpider {
     }
     public static void getQueAndDesc(Zhihu z)
     {
-    	String s = BasicFunctions.getContent(z.zhihuUrl);
+    	String s = BasicFunctions.getContentZhihu(z.zhihuUrl);
     	//System.out.println(s);
     	//System.out.println(z.zhihuUrl);
     	Pattern p1 = Pattern.compile("zm-item-title\">\n\n.+?content\">(.+?)<");
@@ -110,7 +99,7 @@ public class ZhihuSpider {
     public static ArrayList<Answer> getAnswers(Zhihu z, int min ,Queue<String> authorLinks)
     {
     	ArrayList<Answer> result = new ArrayList<Answer>();
-    	String s = BasicFunctions.getContent(z.zhihuUrl);
+    	String s = BasicFunctions.getContentZhihu(z.zhihuUrl);
     	
     	Pattern link = Pattern.compile("data-atoken=\"(.+?)\"");
     	Matcher m0 = link.matcher(s);
@@ -138,7 +127,7 @@ public class ZhihuSpider {
     		//System.out.println(m4.group(1));
     		if(v>=min)
     		{
-    			Answer a= new Answer(m2.group(1),m3.group(1),v,m0.group(1));
+    			Answer a= new Answer(m2.group(1),m3.group(1),v,m0.group(1),"");
     			result.add(a);
     		}
     		authorLinks.add("https://www.zhihu.com"+m4.group(1)+"/answers");
@@ -152,7 +141,7 @@ public class ZhihuSpider {
     {
     	while(!authorLinks.isEmpty()&&todo.size()<maxQueue)
     	{
-    		String html = BasicFunctions.getContent(authorLinks.poll());
+    		String html = BasicFunctions.getContentZhihu(authorLinks.poll());
 	    	Pattern question = Pattern.compile("ContentItem-title\">.+?href=\"(.+?)\"");
 	    	Matcher m1 = question.matcher(html);
 	    	while(m1.find())
@@ -168,7 +157,7 @@ public class ZhihuSpider {
     	Queue<Zhihu> todo = null;
     	
 		try {
-			todo = getZhihu(BasicFunctions.getContent(starUrl));
+			todo = getZhihu(BasicFunctions.getContentZhihu(starUrl));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -179,6 +168,7 @@ public class ZhihuSpider {
     		System.out.printf("todo size %d\n",todo.size());
     		System.out.printf("visited size %d\n",visited.size());
     		Zhihu ques = todo.poll();
+
     		if(!visited.contains(ques.zhihuUrl))
     		{
     			Queue<String> authorLinks = new LinkedList<>();

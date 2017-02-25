@@ -1,8 +1,10 @@
 package pers.crawler.weibo;
 
+import pers.crawler.basic.JDBC;
 import pers.crawler.basic.WeiboConfig;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by LY on 2/15/2017.
@@ -11,36 +13,46 @@ public class Main
 {
     public static void main(String[] args)
     {
-        int pages = 10;
+        JDBC.connect();
         long start = System.currentTimeMillis();
-        //WeiboCrawler w = new WeiboCrawler();
-        //w.crawling(0,20);
-        //BasicFunctions.getContent("http://weibo.com/xinwenhuabao?from=feed&loc=at&nick=%E6%96%B0%E6%96%87%E5%8C%96%E6%8A%A5");
+
         ArrayList<Thread> threadList = new ArrayList<Thread>(WeiboConfig.THREAD_NUM);
-        /*for(int i = 0 ; i < WeiboConfig.THREAD_NUM; i++) {
-            WeiboCrawlerThread crawler = new WeiboCrawlerThread(i);
+        for(int i = 0 ; i < WeiboConfig.THREAD_NUM; i++) {
+            Runnable crawler = new WeiboCrawlerThread(i);
+
             Thread t = new Thread(crawler);
             t.start();
             threadList.add(t);
 
         }
-        while(threadList.size() > 0) {
-            Thread child = (Thread) threadList.remove(0);
-            try {
-                child.join();
-            }catch(Exception e)
+        boolean b = true;
+        while(b)
+        {
+            Iterator<Thread> it = threadList.iterator();
+            boolean c = false;
+            System.out.print("Threads status :  ");
+            while(it.hasNext())
             {
-                e.printStackTrace();
+                boolean d = it.next().isAlive();
+                c = c | d;
+                System.out.print(d+"  ");
+
             }
-        }*/
-        WeiboCrawler w = new WeiboCrawler();
-        w.crawling(0,WeiboConfig.PAGELIMIT);
+            b = c;
+            System.out.print("\n");
+            try {
+                Thread.sleep(5000);
+            }catch (Exception e){}
+        }
+
         //String url = "http://weibo.com/n/%E5%88%98%E8%8A%B8?from=feed&loc=at";
 
         //System.out.print(url+"\n");
 
         long end = System.currentTimeMillis();
-        System.out.print((end-start)/pages);
+        System.out.print((end-start)/WeiboConfig.PAGELIMIT);
+        /*WeiboParser p = new WeiboParser("http://weibo.com/u/5931118095?refer_flag=1001030102_");
+        p.parse(new UrlFilter(),new UrlFilter(),new UrlFilter());*/
     }
 
 }

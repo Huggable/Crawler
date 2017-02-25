@@ -1,4 +1,4 @@
-package pers.crawler.weibo;
+package pers.crawler.basic;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -14,15 +14,15 @@ public class UrlFilter {
     {
         urls = Collections.synchronizedSet(new LinkedHashSet<>());
     }
-    public  boolean contains(Object o)
+    public  synchronized boolean contains(Object o)
     {
         return urls.contains(o);
     }
-    public  void add(Object o)
+    public  synchronized void add(Object o)
     {
         urls.add(o);
     }
-    public  Object getNext()
+    public  synchronized Object getNext()
     {
         Iterator<Object> it = urls.iterator();
         if(it.hasNext())
@@ -31,7 +31,6 @@ public class UrlFilter {
             it.remove();
             return o;
         }
-
         else return null;
     }
 

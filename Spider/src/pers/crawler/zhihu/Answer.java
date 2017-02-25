@@ -5,13 +5,15 @@ public class Answer {
 	public String text;
 	public String author;
 	public int votes;
-	public String link;
-	public Answer(String a, String t, int v, String l)
+	public String id;
+	public String authorLink;
+	public Answer(String a, String t, int v, String i,String al)
 	{
 		//有
 		author = a;
 		text = t;
 		votes = v;
-		link = l;
+		id = i;
+		authorLink = al;
 	}
 }
